@@ -1,0 +1,13 @@
+header: Evry tools
+wikis:
+	links:
+		https://myawesome.wiki.com/project1
+		https://myawesome.wiki.com/project2
+repos:
+	links:
+	git@github.com:Modulus/Repo1.git
+	git@github.com:Modulus/Repo2.git
+tools:
+	link:
+		http://someobscuretool.com
+		http://somecooltool.com
