@@ -14,15 +14,20 @@ COPY ./tools-list.yml /var/www/apps/tool-suite/
 # Install Nginx.
 RUN apt-get update && apt-get install -y nginx
 
-RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uwsgi uwsgi-plugin-python 
+RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uwsgi uwsgi-plugin-python
 #supervisor
 
 #Install python packages
-# Reference
-#RUN pip install -r /var/www/apps/tools-suite/requirements.txt
 RUN pip install virtualenv
-
 VOLUME ["/var/www/apps/tool-suite/venv"]
+WORKDIR /var/www/apps/tool-suite/venv
+RUN virtualenv
+RUN source /var/www/apps/tool-suite/venv/bin/activate
+
+RUN pip install -r /var/www/apps/tools-suite/requirements.txt
+
+
+
 
 RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 #start the uwsgi server for the flask app
