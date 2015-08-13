@@ -20,6 +20,6 @@ server {
     }
 
     location = / {
-        rewrite ^ /webapp/index.html permanent;
+        rewrite ^ /dist/index.html permanent;
     }
 }

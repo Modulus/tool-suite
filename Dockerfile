@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 #Before the Docker build, run "grunt build"
 
-COPY dist /var/www/apps/tools-suite/web
+COPY dist /var/www/apps/tools-suite/
 
 COPY ./tool-suite.py /var/www/apps/tools-suite/
 
@@ -46,7 +46,7 @@ RUN ln -s /etc/uwsgi/apps-available/uwsgi-config.ini /etc/uwsgi/apps-enabled/uws
 WORKDIR /var/www/apps/tools-suite/
 
 #CMD ["supervisord", "-n"]
-CMD ["nginx]
+CMD ["nginx"]
 
 # Expose ports.
 EXPOSE 8080
