@@ -1,15 +1,31 @@
 header: 'Evry tools'
 wikis:
   links:
-    - 'https://myawesome.wiki.com/project1'
-    - 'https://myawesome.wiki.com/project2'
-    - 'http://someobscuretool.com'
-    - 'http://somecooltool.com'
+    -
+      label: Project1
+      url: 'https://myawesome.wiki.com/project1'
+    -
+      label: 'Project2'
+      url: 'https://myawesome.wiki.com/project2'
+    -
+      label: 'Obscure crap'
+      url: 'http://someobscuretool.com'
+    -
+      label: 'Cool tool'
+      url: 'http://somecooltool.com'
 repos:
   links:
-    - 'git@github.com:Modulus/Repo1.git'
-    - 'git@github.com:Modulus/Repo2.git'
+    -
+      label: Repo1
+      url: 'git@github.com:Modulus/Repo1.git'
+    -
+      label: 'Repo2'
+      url: 'git@github.com:Modulus/Repo2.git'
 tools:
   links:
-    - 'http://someobscuretool.com'
-    - 'http://somecooltool.com'
+    -
+      label: 'Obscure crap'
+      url: 'http://someobscuretool.com'
+    -
+      label: 'Oooooh shiny!!!'
+      url: 'http://somecooltool.com'

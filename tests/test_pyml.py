@@ -7,32 +7,7 @@ import os
 class TestPyml(unittest.TestCase):
 
     def setUp(self):
-        self.expected = {'repos':
-                             {'links':
-                                  [
-                                      'git@github.com:Modulus/Repo1.git',
-                                      'git@github.com:Modulus/Repo2.git'
-                                  ]
-                             },
-                         'wikis': {
-                             'links':
-                                       [
-                                           'https://myawesome.wiki.com/project1',
-                                           'https://myawesome.wiki.com/project2',
-                                           'git@github.com:Modulus/Repo1.git',
-                                           'git@github.com:Modulus/Repo2.git',
-                                           'http://someobscuretool.com',
-                                           'http://somecooltool.com'
-                                       ]
-                         },
-                         'tools': {'links':
-                                       [
-                                           'http://someobscuretool.com',
-                                           'http://somecooltool.com'
-                                       ]
-                         },
-                         'header': 'Evry tools'
-        }
+        self.expected = {'wikis': {'links': [{'url': 'https://myawesome.wiki.com/project1', 'label': 'Project1'}, {'url': 'https://myawesome.wiki.com/project2', 'label': 'Project2'}, {'url': 'http://someobscuretool.com', 'label': 'Obscure crap'}, {'url': 'http://somecooltool.com', 'label': 'Cool tool'}]}, 'repos': {'links': [{'url': 'git@github.com:Modulus/Repo1.git', 'label': 'Repo1'}, {'url': 'git@github.com:Modulus/Repo2.git', 'label': 'Repo2'}]}, 'header': 'Evry tools', 'tools': {'links': [{'url': 'http://someobscuretool.com', 'label': 'Obscure crap'}, {'url': 'http://somecooltool.com', 'label': 'Oooooh shiny!!!'}]}}
 
     def test_file_import_hasfile_is_not_none(self):
         root_path = os.path.dirname(__file__)

@@ -9,15 +9,14 @@
  */
 
   angular.module('toolSuiteApp')
-    .controller('MainCtrl',function($scope, $http, $log){
+    .controller('MainCtrl',function($scope, $http){
       $scope.tools = [];
       getData($scope.tools)
 
 
       function getData(tools){
         $http.get("http://localhost:5000/api").then(function(response){
-          $log(response);
-          tools = response;
+          $scope.tools = response.data;
         })
       }
 
