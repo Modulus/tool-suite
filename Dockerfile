@@ -2,13 +2,14 @@ FROM ubuntu:14.04
 
 #Before the Docker build, run "grunt build"
 
-ADD .dist /var/www/apps/tools-suite/web
+COPY dist /var/www/apps/tools-suite/web
 
-ADD .tools-suite.py /var/www/apps/tools-suite/tools-suite.py
+COPY tools-suite.py /var/www/apps/tools-suite/
 
-ADD .requirements.txt /var/www/apps/tools-suite/requirements.txt
+COPY requirements.txt /var/www/apps/tools-suite/
 
-ADD .tools-list.yml /var/www/apps/tools-suite/tools-list.yml
+COPY tools-list.yml /var/www/apps/tools-suite/
+
 
 # Install Nginx.
 RUN apt-get update && apt-get install -y nginx
