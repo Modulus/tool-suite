@@ -1,12 +1,12 @@
 upstream uwsgicluster {
-    server unix:///tmp/tools-suite.sock;
+    server unix:///tmp/tool-suite.sock;
 }
 
 server {
     listen 8080;
     charset utf-8;
     location ^~ /webapp/ {
-        root /var/www/apps/tools-suite/;
+        root /var/www/apps/tool-suite/;
     }
 
     location /api {

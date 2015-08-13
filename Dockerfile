@@ -2,13 +2,13 @@ FROM ubuntu:14.04
 
 #Before the Docker build, run "grunt build"
 
-COPY dist /var/www/apps/tools-suite/
+COPY dist /var/www/apps/tool-suite/
 
-COPY ./tool-suite.py /var/www/apps/tools-suite/
+COPY ./tool-suite.py /var/www/apps/tool-suite/
 
-COPY ./requirements.txt /var/www/apps/tools-suite/
+COPY ./requirements.txt /var/www/apps/tool-suite/
 
-COPY ./tools-list.yml /var/www/apps/tools-suite/
+COPY ./tools-list.yml /var/www/apps/tool-suite/
 
 
 # Install Nginx.
@@ -19,9 +19,12 @@ RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uws
 
 #Install python packages
 # Reference
-RUN pip install -r /var/www/apps/tools-suite/requirements.txt
+#RUN pip install -r /var/www/apps/tools-suite/requirements.txt
+RUN pip install virtualenv
 
+VOLUME ["/var/www/apps/tool-suite/venv"]
 
+RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 #start the uwsgi server for the flask app
 #WORKDIR /var/www/apps/tools-suite
 
