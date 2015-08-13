@@ -46,7 +46,7 @@ RUN ln -s /etc/uwsgi/apps-available/uwsgi-config.ini /etc/uwsgi/apps-enabled/uws
 WORKDIR /var/www/apps/tools-suite/
 
 #CMD ["supervisord", "-n"]
-CMD["nginx]
+CMD ["nginx]
 
 # Expose ports.
 EXPOSE 8080
