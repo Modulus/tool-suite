@@ -33,8 +33,8 @@ ADD ./config/nginx-config /etc/nginx/sites-available/nginx-config
 #ADD ./config/superv.conf /usr/local/supervisord.conf
 
 #Remove default sites-enabled from nginx with symbolic links
-RUN rm /etc/nginx/sites-enabled/default
-RUN rm /etc/nginx/sites-available/default
+#RUN rm /etc/nginx/sites-enabled/default
+#RUN rm /etc/nginx/sites-available/default
 
 #Add symbolic links
 RUN ln -s /etc/nginx/sites-available/nginx-config /etc/nginx/sites-enabled/vups_nginx
