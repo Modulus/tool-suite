@@ -1,11 +1,16 @@
-from flask import Flask
-
+from flask import Flask, jsonify
+from core.file_import import import_yml
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/api')
 def hello_world():
-    return 'Hello World!'
+    import os
+    root_path = os.path.dirname(__file__)
+    yml_file = os.path.join(root_path, "tools-list.yml")
+    result = import_yml(yml_file)
+
+    return jsonify(result)
 
 
 if __name__ == '__main__':

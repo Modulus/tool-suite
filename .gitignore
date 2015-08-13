@@ -59,3 +59,9 @@ target/
 #idea shit
 .idea
 *.iml
+
+
+#yo crap
+node_modules
+bower_components
+.tmp
