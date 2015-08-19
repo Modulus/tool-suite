@@ -6,7 +6,7 @@ server {
     listen 8080;
     charset utf-8;
     location ^~ /webapp/ {
-        root /var/www/apps/tool-suite/;
+        root /var/www/apps/tool-suite/dist;
     }
 
     location /api {
@@ -20,6 +20,6 @@ server {
     }
 
     location = / {
-        rewrite ^ /dist/index.html permanent;
+        rewrite ^ /webapp/index.html permanent;
     }
 }
