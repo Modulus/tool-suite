@@ -15,14 +15,14 @@ COPY ./tools-list.yml /var/www/apps/tool-suite/tools-list.yml
 RUN apt-get update && apt-get install -y nginx
 
 RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uwsgi uwsgi-plugin-python
-#supervisor
 
 #Install python packages
-RUN pip install virtualenv
-VOLUME ["/var/www/apps/tool-suite/venv"]
-WORKDIR /var/www/apps/tool-suite/venv
-RUN virtualenv
-RUN source /var/www/apps/tool-suite/venv/bin/activate
+#Virtualenv not needed in a goddamn container!
+#RUN pip install virtualenv
+#VOLUME ["/var/www/apps/tool-suite/venv"]
+#WORKDIR /var/www/apps/tool-suite/venv
+#RUN virtualenv
+#RUN source /var/www/apps/tool-suite/venv/bin/activate
 
 RUN pip install -r /var/www/apps/tools-suite/requirements.txt
 
@@ -49,7 +49,6 @@ RUN ln -s /etc/uwsgi/apps-available/uwsgi-config.ini /etc/uwsgi/apps-enabled/uws
 # Define working directory.
 WORKDIR /var/www/apps/tools-suite/
 
-#CMD ["supervisord", "-n"]
 CMD ["nginx"]
 
 # Expose ports.
