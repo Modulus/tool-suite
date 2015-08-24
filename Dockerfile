@@ -2,13 +2,13 @@ FROM ubuntu:14.04
 
 #Before the Docker build, run "grunt build"
 
-COPY dist /var/www/apps/tool-suite/dist
+ADD dist /var/www/apps/tool-suite/dist
 
-COPY ./tool-suite.py /var/www/apps/tool-suite/tool-suite.py
+COPY ./tool-suite.py /var/www/apps/tool-suite/
 
-COPY ./requirements.txt /var/www/apps/tool-suite/requirements.txt
+COPY ./requirements.txt /var/www/apps/tool-suite/
 
-COPY ./tools-list.yml /var/www/apps/tool-suite/tools-list.yml
+COPY ./tools-list.yml /var/www/apps/tool-suite/
 
 
 # Install Nginx.
@@ -32,8 +32,8 @@ RUN pip install -r /var/www/apps/tools-suite/requirements.txt
 #Add the configuration for uwsgi and nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/default
-ADD ./config/uwsgi-config.ini /etc/uwsgi/apps-available/uwsgi-config.ini
-ADD ./config/nginx-config /etc/nginx/sites-available/nginx-config
+COPY ./config/uwsgi-config.ini /etc/uwsgi/apps-available/
+COPY ./config/nginx-config /etc/nginx/sites-available/
 #ADD ./config/superv.conf /usr/local/supervisord.conf
 
 #Remove default sites-enabled from nginx with symbolic links
