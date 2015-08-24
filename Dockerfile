@@ -24,7 +24,7 @@ RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uws
 #RUN virtualenv
 #RUN source /var/www/apps/tool-suite/venv/bin/activate
 
-RUN pip install -r /var/www/apps/tools-suite/requirements.txt
+RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 
 #start the uwsgi server for the flask app
 #WORKDIR /var/www/apps/tools-suite
