@@ -12,7 +12,9 @@ COPY ./tools-list.yml /var/www/apps/tool-suite/
 
 
 # Install Nginx mm
-RUN  apt-get update && apt-get install -y python python-pip python-dev nginx uwsgi uwsgi-plugin-python build-essential
+RUN apt-get update
+RUN apt-get install -y python python-pip python-dev
+RUN apt-get install -y nginx uwsgi uwsgi-plugin-python
 
 #Install python packages
 
