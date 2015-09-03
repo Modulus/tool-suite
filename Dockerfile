@@ -40,7 +40,6 @@ RUN ln -s /etc/uwsgi/apps-available/uwsgi-config.ini /etc/uwsgi/apps-enabled/uws
 
 # Define working directory.
 WORKDIR /var/www/apps/tools-suite/
-RUN ["nginx stop"]
 RUN ["service uwsgi restart"]
 
 CMD ["nginx"]
