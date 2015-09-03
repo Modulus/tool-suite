@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 #Before the Docker build, run "grunt build"
 
-ADD .dist /var/www/apps/tool-suite/dist
+ADD ./dist /var/www/apps/tool-suite/dist
 
 COPY ./tool-suite.py /var/www/apps/tool-suite/
 
