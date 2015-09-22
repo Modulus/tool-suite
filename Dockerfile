@@ -43,7 +43,7 @@ RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 
 # Define working directory.
 WORKDIR /var/www/apps/tools-suite/
-RUN ["service uwsgi restart"]
+#RUN ["service uwsgi restart"]
 
 #CMD ["nginx"]
 
