@@ -3,14 +3,13 @@ FROM ubuntu:15.10
 #Before the Docker build, run "grunt build"
 #For now just use gunicorn and expose it.
 
-ADD dist /var/www/apps/tool-suite/dist
+ADD ./dist /var/www/apps/tool-suite/dist
 
-COPY *.py /var/www/apps/tool-suite/
+COPY ./*.py /var/www/apps/tool-suite/
 
-COPY requirements.txt /var/www/apps/tool-suite/
+COPY ./requirements.txt /var/www/apps/tool-suite/
 
-COPY *.yml /var/www/apps/tool-suite/
-
+COPY ./*.yml /var/www/apps/tool-suite/
 
 
 # Install Nginx mm
@@ -44,7 +43,7 @@ RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 
 # Define working directory.
 WORKDIR /var/www/apps/tool-suite/
-#RUN ["service uwsgi restart"]
+
 
 #CMD ["nginx"]
 
