@@ -5,11 +5,11 @@ FROM ubuntu:15.10
 
 ADD ./dist /var/www/apps/tool-suite/dist
 
-COPY ./tool-suite.py /var/www/apps/tool-suite/
+COPY ./*.py /var/www/apps/tool-suite/
 
 COPY ./requirements.txt /var/www/apps/tool-suite/
 
-COPY ./tools-list.yml /var/www/apps/tool-suite/
+COPY ./*.yml /var/www/apps/tool-suite/
 
 
 # Install Nginx mm
