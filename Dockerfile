@@ -47,7 +47,7 @@ WORKDIR /var/www/apps/tools-suite/
 
 #CMD ["nginx"]
 
-CMD ["gunicorn --bind 0.0.0.0:8000 tool-suite:app"]
+CMD gunicorn --bind 0.0.0.0:8000 tool-suite:app
 
 # Expose ports.
 EXPOSE 8000
