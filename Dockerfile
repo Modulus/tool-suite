@@ -6,7 +6,7 @@ FROM ubuntu:15.10
 ADD ./dist /var/www/apps/tool-suite/dist
 
 COPY ./*.py /var/www/apps/tool-suite/
-COPY core /var/www/apps/tool-suite/
+COPY core /var/www/apps/tool-suite/core
 
 
 COPY ./requirements.txt /var/www/apps/tool-suite/
