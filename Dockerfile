@@ -3,6 +3,17 @@ FROM ubuntu:15.10
 #Before the Docker build, run "grunt build"
 #For now just use gunicorn and expose it.
 
+# Install Nginx mm
+RUN apt-get update
+RUN apt-get install -y python python-pip python-dev
+RUN apt-get install -y nginx nodejs
+
+# Define working directory.
+WORKDIR /var/www/apps/tool-suite/app
+CMD npm install
+CMD grunt
+
+# Add the built files to the container image
 ADD ./dist /var/www/apps/tool-suite/dist
 
 COPY ./*.py /var/www/apps/tool-suite/
@@ -14,10 +25,6 @@ COPY ./requirements.txt /var/www/apps/tool-suite/
 COPY ./tools-list.yml /var/www/apps/tool-suite/
 
 
-# Install Nginx mm
-RUN apt-get update
-RUN apt-get install -y python python-pip python-dev
-RUN apt-get install -y nginx
 
 #Install python packages
 
@@ -39,10 +46,15 @@ RUN ln -s /etc/nginx/sites-available/nginx-config /etc/nginx/sites-enabled/vups_
 
 
 
+
+
+
+# Build the angular app
+
+
+
 # Define working directory.
 WORKDIR /var/www/apps/tool-suite/
-
-
 
 CMD gunicorn --bind 0.0.0.0:8000 tool-suite:app &
 
