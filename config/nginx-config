@@ -1,5 +1,6 @@
 upstream uwsgicluster {
-    server unix:/tmp/tool-suite.sock;
+    #server unix:/tmp/tool-suite.sock;
+    server 127.0.0.1:8080;
 }
 
 server {
