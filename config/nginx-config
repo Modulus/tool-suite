@@ -5,12 +5,12 @@ upstream uwsgicluster {
 server {
     listen 8080;
     charset utf-8;
-  ##  location ^~ /webapp/ {
-   #     root /var/www/apps/tool-suite/dist;
-   #}
+    location ^~ /webapp/ {
+        root /var/www/apps/tool-suite/dist;
+   }
 
     location /api {
-        #include uwsgi_params;
+        include uwsgi_params;
         uwsgi_pass uwsgicluster;
         proxy_redirect off;
         proxy_set_header Host $host;
@@ -19,7 +19,7 @@ server {
         proxy_set_header X-Forwarded_Host $server_name;
     }
 
-    #location = / {
-   #     rewrite ^ /webapp/index.html permanent;
-    #}
+    location = / {
+       rewrite ^ /webapp/index.html permanent;
+    }
 }
