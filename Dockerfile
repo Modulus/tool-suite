@@ -48,4 +48,4 @@ CMD gunicorn --bind 0.0.0.0:8000 tool-suite:app &
 
 CMD ["nginx"]
 
-
+EXPOSE 8080
