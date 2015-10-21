@@ -8,7 +8,7 @@ server {
     charset utf-8;
     location / {
         root /var/www/apps/tool-suite/dist;
-        index index.html index.htm;
+        #index index.html index.htm;
    }
 
     location /api {
@@ -21,7 +21,7 @@ server {
         proxy_set_header X-Forwarded_Host $server_name;
     }
 
-    #location = / {
-    #   rewrite ^ /webapp/index.html permanent;
-    #}
+    location = / {
+       rewrite ^ /index.html permanent;
+    }
 }
