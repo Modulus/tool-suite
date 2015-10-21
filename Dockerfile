@@ -10,8 +10,8 @@ RUN apt-get install -y nginx nodejs
 
 # Define working directory.
 WORKDIR /var/www/apps/tool-suite/app
-CMD npm install
-CMD grunt
+#CMD npm install
+#CMD grunt
 
 # Add the built files to the container image
 ADD ./dist /var/www/apps/tool-suite/dist
