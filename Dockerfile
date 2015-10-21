@@ -33,7 +33,8 @@ RUN pip install -r /var/www/apps/tool-suite/requirements.txt
 
 #Add the configuration for uwsgi and nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-#RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-available/default
 COPY ./config/nginx-config /etc/nginx/sites-available/
 
 
