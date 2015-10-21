@@ -1,18 +1,19 @@
-upstream uwsgicluster {
+#upstream uwsgicluster {
     #server unix:/tmp/tool-suite.sock;
-    server 127.0.0.1:8080;
-}
+ #   server 127.0.0.1:8080;
+#}
 
 server {
     listen 8080;
     charset utf-8;
-    location ^~ /webapp/ {
+    location / {
         root /var/www/apps/tool-suite/dist;
+        index index.html index.htm;
    }
 
     location /api {
         include uwsgi_params;
-        uwsgi_pass uwsgicluster;
+        proxy_pass http://localhost:5000;
         proxy_redirect off;
         proxy_set_header Host $host;
         proxy_set_header X-Real_IP $remote_addr;
@@ -20,7 +21,7 @@ server {
         proxy_set_header X-Forwarded_Host $server_name;
     }
 
-    location = / {
-       rewrite ^ /webapp/index.html permanent;
-    }
+    #location = / {
+    #   rewrite ^ /webapp/index.html permanent;
+    #}
 }
