@@ -3,7 +3,7 @@ from core.file_import import import_yml
 app = Flask(__name__)
 
 
-@app.route('/api')
+@app.route('/')
 def hello_world():
     import os
     root_path = os.path.dirname(__file__)

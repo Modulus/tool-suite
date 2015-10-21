@@ -6,7 +6,7 @@
 server {
     listen 8080;
     charset utf-8;
-    location / {
+    location ^~ / {
         root /var/www/apps/tool-suite/dist;
         #index index.html index.htm;
    }
