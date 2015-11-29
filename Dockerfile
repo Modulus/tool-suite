@@ -58,8 +58,10 @@ RUN ln -s /etc/nginx/sites-available/nginx-config /etc/nginx/sites-enabled/vups_
 # Define working directory.
 WORKDIR /var/www/apps/tool-suite/
 
-CMD gunicorn --bind 0.0.0.0:5000 tool-suite:app &
+EXPOSE 5000 8080
+
+CMD ["gunicorn --bind 0.0.0.0:5000 tool-suite:app &"]
 
 CMD ["nginx"]
 
-EXPOSE 5000 8080
+
