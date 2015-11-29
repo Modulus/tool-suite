@@ -6,7 +6,7 @@
 server {
     listen 8080;
     charset utf-8;
-    location ^~ / {
+    location / {
         root /var/www/apps/tool-suite/dist;
         #index index.html index.htm;
    }
@@ -21,7 +21,7 @@ server {
         proxy_set_header X-Forwarded_Host $server_name;
     }
 
-    location = / {
-       rewrite ^ /index.html permanent;
-    }
+    #location = / {
+       #rewrite ^ /index.html permanent;
+    #}
 }
