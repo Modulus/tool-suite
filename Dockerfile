@@ -62,4 +62,4 @@ CMD gunicorn --bind 0.0.0.0:5000 tool-suite:app &
 
 CMD ["nginx"]
 
-EXPOSE 5000
+EXPOSE 5000 8080
