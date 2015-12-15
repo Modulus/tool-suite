@@ -1,67 +1,54 @@
-FROM ubuntu:15.10
+# Copyright 2013 Thatcher Peskens
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-#Before the Docker build, run "grunt build"
-#For now just use gunicorn and expose it.
+from ubuntu:15.10
 
-# Install Nginx mm
-RUN apt-get update
-RUN apt-get install -y python python-pip python-dev
-RUN apt-get install -y nginx nodejs
+maintainer Dockerfiles
 
-# Define working directory.
-WORKDIR /var/www/apps/tool-suite/app
-#CMD npm install
-#CMD grunt
+#run echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+run perl -p -i.orig -e 's/archive.ubuntu.com/mirrors.aliyun.com\/ubuntu/' /etc/apt/sources.list
+run apt-get update
+run apt-get install -y build-essential git
+run apt-get install -y python python-dev python-setuptools
+run apt-get install -y nginx supervisor
+run easy_install pip
 
-# Add the built files to the container image
-ADD ./dist /var/www/apps/tool-suite/dist
+# install uwsgi now because it takes a little while
+run pip install uwsgi
 
-COPY ./*.py /var/www/apps/tool-suite/
-COPY core /var/www/apps/tool-suite/core
+# install nginx
+run apt-get install -y software-properties-common python-software-properties
+run apt-get update
+run add-apt-repository -y ppa:nginx/stable
+run apt-get install -y sqlite3
 
+# install our code
+add . /home/docker/code/
 
-COPY ./requirements.txt /var/www/apps/tool-suite/
+# setup all the configfiles
+run echo "daemon off;" >> /etc/nginx/nginx.conf
+run rm /etc/nginx/sites-enabled/default
+run ln -s /home/docker/code/nginx-app.conf /etc/nginx/sites-enabled/
+run ln -s /home/docker/code/supervisor-app.conf /etc/supervisor/conf.d/
 
-COPY ./tools-list.yml /var/www/apps/tool-suite/
+# run pip install
+run pip install -r /home/docker/code/app/requirements.txt
 
+# install django, normally you would remove this step because your project would already
+# be installed in the code/app/ directory
+#run django-admin.py startproject website /home/docker/code/app/
 
-
-#Install python packages
-
-RUN pip install -r /var/www/apps/tool-suite/requirements.txt
-
-
-#Add the configuration for uwsgi and nginx
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-RUN echo "error_log /dev/stdout info;" >> /etc/nginx/nginx.conf
-#RUN rm /etc/nginx/sites-enabled/default
-#RUN rm /etc/nginx/sites-available/default
-COPY ./config/nginx-config /etc/nginx/sites-available/
-
-
-#Remove default sites-enabled from nginx with symbolic links
-RUN rm /etc/nginx/sites-enabled/default
-RUN rm /etc/nginx/sites-available/default
-
-#Add symbolic links
-RUN ln -s /etc/nginx/sites-available/nginx-config /etc/nginx/sites-enabled/vups_nginx
-
-
-
-
-
-
-# Build the angular app
-
-
-
-# Define working directory.
-WORKDIR /var/www/apps/tool-suite/
-
-EXPOSE 5000 8080
-
-CMD ["gunicorn --bind 0.0.0.0:5000 tool-suite:app &"]
-
-CMD ["nginx"]
-
+expose 80
+cmd ["supervisord", "-n"]
 
