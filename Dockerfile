@@ -1,54 +1,30 @@
-# Copyright 2013 Thatcher Peskens
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+FROM ubuntu:15.10
 
-from ubuntu:15.10
 
-maintainer Dockerfiles
+#ENV DEBIAN_FRONTEND noninteractive
 
-#run echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-run perl -p -i.orig -e 's/archive.ubuntu.com/mirrors.aliyun.com\/ubuntu/' /etc/apt/sources.list
-run apt-get update
-run apt-get install -y build-essential git
-run apt-get install -y python python-dev python-setuptools
-run apt-get install -y nginx supervisor
-run easy_install pip
+RUN apt-get update
+RUN apt-get -y install nginx  sed python-pip python-dev uwsgi-plugin-python supervisor
 
-# install uwsgi now because it takes a little while
-run pip install uwsgi
+RUN mkdir -p /var/log/nginx/app
+RUN mkdir -p /var/log/uwsgi/app/
 
-# install nginx
-run apt-get install -y software-properties-common python-software-properties
-run apt-get update
-run add-apt-repository -y ppa:nginx/stable
-run apt-get install -y sqlite3
 
-# install our code
-add . /home/docker/code/
+RUN rm /etc/nginx/sites-enabled/default
+COPY nginx-app.conf /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/nginx-app.conf /etc/nginx/sites-enabled/nginx-app.conf
+COPY uwsgi.ini /var/www/app/
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# setup all the configfiles
-run echo "daemon off;" >> /etc/nginx/nginx.conf
-run rm /etc/nginx/sites-enabled/default
-run ln -s /home/docker/code/nginx-app.conf /etc/nginx/sites-enabled/
-run ln -s /home/docker/code/supervisor-app.conf /etc/supervisor/conf.d/
 
-# run pip install
-run pip install -r /home/docker/code/app/requirements.txt
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# install django, normally you would remove this step because your project would already
-# be installed in the code/app/ directory
-#run django-admin.py startproject website /home/docker/code/app/
+COPY dist /var/www/app/static
+COPY core /var/www/app
 
-expose 80
-cmd ["supervisord", "-n"]
+RUN pip install -r /var/www/app/requirements.txt
 
+#EXPOSE 5050
+
+CMD ["/usr/bin/supervisord"]
