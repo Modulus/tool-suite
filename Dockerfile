@@ -25,6 +25,6 @@ COPY core /var/www/app
 
 RUN pip install -r /var/www/app/requirements.txt
 
-#EXPOSE 5050
+EXPOSE 5050
 
 CMD ["/usr/bin/supervisord"]
