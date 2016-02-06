@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from core.file_import import import_yml
+from file_import import import_yml
 app = Flask(__name__)
 
 

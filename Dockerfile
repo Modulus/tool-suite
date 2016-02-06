@@ -28,3 +28,4 @@ RUN pip install -r /var/www/app/requirements.txt
 EXPOSE 5050
 
 CMD ["/usr/bin/supervisord"]
+#https://github.com/realpython/orchestrating-docker/blob/master/nginx/sites-enabled/flask_project

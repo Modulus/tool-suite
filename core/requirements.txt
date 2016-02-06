@@ -2,3 +2,4 @@ pyaml==15.6.3
 Flask==0.10.0
 pytest==2.7.2
 gunicorn==19.3.0
+rethinkdb==2.2.0.post3

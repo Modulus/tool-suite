@@ -1,0 +1,11 @@
+rethinkdb:
+    image: rethinkdb:2.2.4
+
+app:
+    build: ./core
+    links:
+        - rethinkdb
+    volumes:
+        - /var/www/app/
+    ports:
+        - "5000:5000"
